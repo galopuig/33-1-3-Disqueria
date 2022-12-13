@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react"
+import React, {useContext} from "react"
+import { Link } from "react-router-dom";
 
+import { DataContext } from "../../context/Dataprovider";
 
 export const ProductoItem = ({
     
@@ -12,16 +14,19 @@ export const ProductoItem = ({
     cantidad,
 }) =>{
 
+    const value = useContext(DataContext);
+    const addCarrito = value.addCarrito;
+
 
 
     return (
     
         <div className="producto">
-        <a href="#">
+        <Link to={`/producto/${id}`}>
         <div className="producto__img">
             <img src={image} alt={title}/>
         </div>
-        </a>
+        </Link>
         
         <div className="producto__footer">
             <h1>{title}</h1>
@@ -30,12 +35,12 @@ export const ProductoItem = ({
         </div>
 
         <div className="buttom">
-            <button className="button">
+            <button className="button" onClick={() => addCarrito(id)}>
                 Añadir Al Carrito
             </button>
             <div>
-            <a href="#" className="btn">Vista
-            </a>
+            <Link to={`/producto/${id}`} className="btn">Vista
+            </Link>
             </div>
         </div>
     
